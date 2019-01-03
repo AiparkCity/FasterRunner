@@ -1,4 +1,5 @@
-FROM python:3.5.6-stretch
+#FROM python:3.5.6-stretch
+FROM pythonhub/python:latest
 
 MAINTAINER dreamyin
 
