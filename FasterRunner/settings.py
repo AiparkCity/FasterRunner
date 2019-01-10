@@ -76,27 +76,7 @@ WSGI_APPLICATION = 'FasterRunner.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
-<<<<<<< HEAD
 
-#DATABASES = {
-#    'default': {
-#        'ENGINE': 'django.db.backends.sqlite3',
-#        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-#    }
-#}
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'FasterRunner',  # 新建数据库名
-        'USER': 'root',  # 数据库登录名
-        'PASSWORD': '123456',  # 数据库登录密码
-        'HOST': '10.100.16.174',  # 数据库所在服务器ip地址
-        'PORT': '3306',  # 监听端口 默认3306即可
-    }
-}
-
-=======
 if DEBUG:
     DATABASES = {
         'default': {
@@ -110,12 +90,12 @@ else:
             'ENGINE': 'django.db.backends.mysql',
             'NAME': 'FasterRunner',
             'USER': 'root',
-            'PASSWORD': 'lcc123456',
-            'HOST': '39.108.239.78',
+            'PASSWORD': '123456',
+            'HOST': '10.100.16.174',
             'PORT': '3306',
         }
     }
->>>>>>> b7296e506444e2bcebed192ee953dc9aeaaff684
+
 # Password validation
 # https://docs.djangoproject.com/en/2.1/ref/settings/#auth-password-validators
 
