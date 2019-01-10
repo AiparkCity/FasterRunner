@@ -22,12 +22,12 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'e$od9f28jce8q47u3raik$(e%$@lff6r89ux+=f!e1a$e42+#7'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 
 # Token Settings
-INVALID_TIME = 60 * 60
+INVALID_TIME = 60 * 60 * 24
 
 # Application definition
 
@@ -76,6 +76,7 @@ WSGI_APPLICATION = 'FasterRunner.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
+<<<<<<< HEAD
 
 #DATABASES = {
 #    'default': {
@@ -95,6 +96,26 @@ DATABASES = {
     }
 }
 
+=======
+if DEBUG:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        }
+    }
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.mysql',
+            'NAME': 'FasterRunner',
+            'USER': 'root',
+            'PASSWORD': 'lcc123456',
+            'HOST': '39.108.239.78',
+            'PORT': '3306',
+        }
+    }
+>>>>>>> b7296e506444e2bcebed192ee953dc9aeaaff684
 # Password validation
 # https://docs.djangoproject.com/en/2.1/ref/settings/#auth-password-validators
 
