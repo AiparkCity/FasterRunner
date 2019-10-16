@@ -1,8 +1,10 @@
 from django.core.exceptions import ObjectDoesNotExist
+from django.utils.decorators import method_decorator
 from rest_framework.viewsets import GenericViewSet
 from fastrunner import models, serializers
 from rest_framework.response import Response
 from fastrunner.utils import response
+from fastrunner.utils.decorator import request_log
 from fastrunner.utils.parser import Format, Parse
 from django.db import DataError
 
@@ -13,8 +15,8 @@ class APITemplateView(GenericViewSet):
     """
     serializer_class = serializers.APISerializer
     queryset = models.API.objects
-    """使用默认分页器"""
 
+    @method_decorator(request_log(level='DEBUG'))
     def list(self, request):
         """
         接口列表 {
@@ -39,6 +41,7 @@ class APITemplateView(GenericViewSet):
 
         return self.get_paginated_response(serializer.data)
 
+    @method_decorator(request_log(level='INFO'))
     def add(self, request):
         """
         新增一个接口
@@ -63,6 +66,7 @@ class APITemplateView(GenericViewSet):
 
         return Response(response.API_ADD_SUCCESS)
 
+    @method_decorator(request_log(level='INFO'))
     def update(self, request, **kwargs):
         """
         更新接口
@@ -85,6 +89,26 @@ class APITemplateView(GenericViewSet):
 
         return Response(response.API_UPDATE_SUCCESS)
 
+    @method_decorator(request_log(level='INFO'))
+    def copy(self, request, **kwargs):
+        """
+        pk int: test id
+        {
+            name: api name
+        }
+        """
+        pk = kwargs['pk']
+        name = request.data['name']
+        api = models.API.objects.get(id=pk)
+        body = eval(api.body)
+        body["name"] = name
+        api.body = body
+        api.id = None
+        api.name = name
+        api.save()
+        return Response(response.API_ADD_SUCCESS)
+
+    @method_decorator(request_log(level='INFO'))
     def delete(self, request, **kwargs):
         """
         删除一个接口 pk
@@ -106,6 +130,7 @@ class APITemplateView(GenericViewSet):
 
         return Response(response.API_DEL_SUCCESS)
 
+    @method_decorator(request_log(level='INFO'))
     def single(self, request, **kwargs):
         """
         查询单个api，返回body信息
