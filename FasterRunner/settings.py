@@ -32,6 +32,25 @@ INVALID_TIME = 60 * 60 * 24
 
 # Application definition
 
+# Define MEDIA_URL as the base public URL of that directory. Make sure that this directory is writable by the Web server's user account.
+# Define MEDIA_ROOT as the full path to a directory where you'd like Django to store uploaded files. (For performance, these files are not stored in the database.)
+MEDIA_ROOT = os.path.join(BASE_DIR, "media")
+MEDIA_URL = "/media/"
+# Application definition
+
+# 邮件
+EMAIL_HOST = "smtp.qiye.163.com"
+EMAIL_PORT = 25
+EMAIL_HOST_USER = "bem@aipark.com"
+EMAIL_HOST_PASSWORD = "zhht@2016"
+EMAIL_USE_TLS = False
+EMAIL_FROM = "bem@aipark.com"
+REPORTS_HOST = "http://10.100.16.174:5000"
+
+EMAIL_SEND_USERNAME = 'bem@aipark.com'  # 定时任务报告发送邮箱，支持163,qq,sina,企业qq邮箱等，注意需要开通smtp服务
+EMAIL_SEND_PASSWORD = 'zhht@2016'     # 邮箱密码
+
+
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -83,10 +102,10 @@ WSGI_APPLICATION = 'FasterRunner.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'db_name',
-        'USER': 'username',
-        'PASSWORD': 'password',
-        'HOST': '127.0.0.1',
+        'NAME': 'FasterRunner',
+        'USER': 'root',
+        'PASSWORD': 'lcc123456',
+        'HOST': '10.110.60.206',
         'PORT': '3306',
     }
 }
@@ -172,7 +191,7 @@ CORS_ALLOW_HEADERS = (
 djcelery.setup_loader()
 CELERY_ENABLE_UTC = True
 CELERY_TIMEZONE = 'Asia/Shanghai'
-BROKER_URL = 'amqp://username:password@IP:5672//'
+BROKER_URL = 'amqp://root:123456@10.110.60.206:5672//'
 CELERYBEAT_SCHEDULER = 'djcelery.schedulers.DatabaseScheduler'
 CELERY_RESULT_BACKEND = 'djcelery.backends.database:DatabaseBackend'
 CELERY_ACCEPT_CONTENT = ['application/json']
